@@ -15,7 +15,15 @@ module.exports = (sequelize, DataTypes) => {
   }
   Website.init({
     name: DataTypes.STRING,
-    url: DataTypes.STRING
+    url: DataTypes.STRING,
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'unknown',
+    },
+    lastChecked: {
+      type: DataTypes.DATE,
+      defaultValue: null,
+    },
   }, {
     sequelize,
     modelName: 'Website',

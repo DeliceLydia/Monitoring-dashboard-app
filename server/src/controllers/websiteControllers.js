@@ -1,4 +1,6 @@
 const models = require("../../models");
+const { monitorWebsites } = require('../helpers/websiteStatusHelper');
+const { isURL } = require('validator');
 
 class WebsiteController {
   static async addWebsite(req, res) {
@@ -17,6 +19,10 @@ class WebsiteController {
 
       if (existingWebsite) {
         return res.status(409).json({ error: "Name or URL already exists." });
+      };
+
+      if (!isURL(url)) {
+        return res.status(400).json({ error: 'Invalid URL format.' });
       }
 
       const website = await models.Website.create(req.body);
@@ -73,6 +79,14 @@ class WebsiteController {
       return res.status(200).json({
         message: "Website deleted successfully!",
       });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  };
+  static async triggerMonitoring(req, res) {
+    try {
+      await monitorWebsites();
+      return res.status(200).json({ message: 'Monitoring triggered successfully.' });
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }

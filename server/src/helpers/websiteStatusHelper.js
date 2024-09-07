@@ -1,0 +1,40 @@
+const axios = require("axios");
+const models = require("../../models");
+
+async function checkWebsiteStatus(website) {
+  try {
+    if (
+      !website.url.startsWith("http://") &&
+      !website.url.startsWith("https://")
+    ) {
+      throw new Error(
+        "Invalid URL format. URL must start with http:// or https://"
+      );
+    }
+
+    const response = await axios.get(website.url, { timeout: 5000 });
+
+    const newStatus = response.status === 200 ? "up" : "down";
+    await website.update({ status: newStatus, lastChecked: new Date() });
+
+    console.log(`Website ${website.name} is ${newStatus}.`);
+  } catch (error) {
+    await website.update({ status: "down", lastChecked: new Date() });
+    console.log(`Website ${website.name} is down. Error: ${error.message}`);
+  }
+}
+
+async function monitorWebsites() {
+  try {
+    const websites = await models.Website.findAll();
+
+    for (const website of websites) {
+      await checkWebsiteStatus(website);
+    }
+  } catch (error) {
+    console.error("Error monitoring websites:", error.message);
+  }
+}
+
+monitorWebsites();
+setInterval(monitorWebsites, 60000);
