@@ -42,7 +42,6 @@ class WebsiteController {
   }
   static async getWebsiteById(req, res) {
     const { id } = req.params;
-
     try {
       const website = await models.Website.findByPk(id);
 
@@ -53,6 +52,26 @@ class WebsiteController {
       return res.status(200).json({
         message: "Website retrieved successfully!",
         website,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async deleteWebsite(req, res) {
+    const { id } = req.params;
+
+    try {
+      const website = await models.Website.findByPk(id);
+
+      if (!website) {
+        return res.status(404).json({ error: "Website not found." });
+      }
+
+      await website.destroy();
+
+      return res.status(200).json({
+        message: "Website deleted successfully!",
       });
     } catch (error) {
       return res.status(500).json({ error: error.message });

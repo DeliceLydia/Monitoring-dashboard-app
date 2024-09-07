@@ -9,5 +9,6 @@ router.get('/', (req, res) => {
 router.post('/websites', WebsiteController.addWebsite);
 router.get('/websites', WebsiteController.getAllWebsites);
 router.get('/websites/:id', WebsiteController.getWebsiteById);
+router.delete('/websites/:id', WebsiteController.deleteWebsite);
 
 module.exports = router;
