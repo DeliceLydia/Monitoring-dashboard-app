@@ -34,6 +34,7 @@ class WebsiteController {
       return res.status(500).json({ error: error.message });
     }
   }
+  
   static async getAllWebsites(req, res) {
     try {
       const websites = await models.Website.findAll();
@@ -46,6 +47,7 @@ class WebsiteController {
       return res.status(500).json({ error: error.message });
     }
   }
+
   static async getWebsiteById(req, res) {
     const { id } = req.params;
     try {
@@ -83,6 +85,7 @@ class WebsiteController {
       return res.status(500).json({ error: error.message });
     }
   };
+
   static async triggerMonitoring(req, res) {
     try {
       await monitorWebsites();
