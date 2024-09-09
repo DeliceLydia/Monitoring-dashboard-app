@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import WebsitesList from "./components/WebsiteList"
+import Navbar from "./components/Navbar"
 
 const App = () => {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+      <Navbar />
+      <WebsitesList />
     </div>
   )
 }
