@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/api';
-const API_URL = 'http://localhost:3000/api/websites'; 
+const BASE_URL = 'https://monitoring-dashboard-app.onrender.com/api';
+// const API_URL = 'http://localhost:3000/api/websites'; 
 
 export const fetchAllWebsites = async () => {
   try {
@@ -15,7 +15,7 @@ export const fetchAllWebsites = async () => {
 
 export const addNewWebsite = async (websiteData) => {
   try {
-    const response = await axios.post(API_URL, websiteData);
+    const response = await axios.post(`${BASE_URL}/websites`, websiteData);
     return response;
   } catch (error) {
     console.error('Error adding new website:', error);
