@@ -37,9 +37,9 @@ const WebsitesList = () => {
   };
 
   return (
-    <div>
+    <div className=''>
       <h1 className="px-4 font-bold text-lg">MONITORING LISTS</h1>
-      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
         {loading && <p>Loading websites...</p>}
         {error && <p className="text-red-500">{error}</p>}
         {!loading && !error && websites.length === 0 && <p>No websites found.</p>}

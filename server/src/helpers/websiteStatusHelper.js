@@ -14,13 +14,13 @@ async function checkWebsiteStatus(website) {
 
     const response = await axios.get(website.url, { timeout: 5000 });
 
-    const newStatus = response.status === 200 ? "up" : "down";
+    const newStatus = response.status === 200 ? "online" : "offline";
     await website.update({ status: newStatus, lastChecked: new Date() });
 
     console.log(`Website ${website.name} is ${newStatus}.`);
   } catch (error) {
-    await website.update({ status: "down", lastChecked: new Date() });
-    console.log(`Website ${website.name} is down. Error: ${error.message}`);
+    await website.update({ status: "offline", lastChecked: new Date() });
+    console.log(`Website ${website.name} is offline. Error: ${error.message}`);
   }
 }
 

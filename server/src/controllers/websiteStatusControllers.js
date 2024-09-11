@@ -26,7 +26,7 @@ class WebsiteStatusController {
 
         const response = await axios.get(website.url, { timeout: 5000 });
 
-        const newStatus = response.status === 200 ? "up" : "down";
+        const newStatus = response.status === 200 ? "online" : "offline";
         await website.update({ status: newStatus, lastChecked: new Date() });
 
         return res.status(200).json({
@@ -34,11 +34,11 @@ class WebsiteStatusController {
           status: newStatus,
         });
       } catch (error) {
-        await website.update({ status: "down", lastChecked: new Date() });
+        await website.update({ status: "offline", lastChecked: new Date() });
 
         return res.status(200).json({
-          message: "Website is currently down.",
-          status: "down",
+          message: "Website is currently offline",
+          status: "offline",
         });
       }
     } catch (error) {

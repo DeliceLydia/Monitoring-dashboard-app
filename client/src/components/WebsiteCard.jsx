@@ -1,8 +1,9 @@
 import React from 'react';
+import { TrashIcon } from '@heroicons/react/outline';
 
 const WebsiteCard = ({ name, url, status, onDelete }) => {
   return (
-    
+
     <div className="bg-white shadow-md rounded-lg p-4 w-full max-w-sm">
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-lg font-semibold text-blue-800">Website</h3>
@@ -18,53 +19,20 @@ const WebsiteCard = ({ name, url, status, onDelete }) => {
       >
         {url}
       </a>
-   
-      <div className="mt-2 flex justify-between">
-        <span className={`text-2xl font-bold ${status === 'Online' ? 'text-green-600' : 'text-red-600'}`}>
+
+      <div className="mt-2 flex justify-between items-center">
+        <span className={`text-2xl font-medium ${status === 'online' ? 'text-green-600' : 'text-red-600'}`}>
           {status}
         </span>
         <button
-        onClick={onDelete}
-        className="mt-4 bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
-      >
-        Delete
-      </button>
+          onClick={onDelete}
+          className="text-[red] px-3 rounded"
+        >
+          <TrashIcon className="h-5 w-5" />
+        </button>
       </div>
-     
     </div>
   );
 };
 
 export default WebsiteCard;
-
-// // src/components/WebsiteCard.js
-// import React from 'react';
-
-// const WebsiteCard = ({ name, url, status, onDelete }) => {
-//   return (
-//     <div className="bg-white shadow-md rounded p-4 flex flex-col justify-between">
-//       <div>
-//         <h2 className="text-xl font-bold">{name}</h2>
-//         <p className="text-sm text-gray-500">{url}</p>
-//         <div className="mt-2">
-//           <span
-//             className={`text-2xl font-bold ${
-//               status === 'Up' ? 'text-green-600' : 'text-red-600'
-//             }`}
-//           >
-//             {status === 'Up' ? 'Online' : 'Offline'}
-//           </span>
-//         </div>
-//       </div>
-//       <button
-//         onClick={onDelete} // Call the onDelete function passed from the parent
-//         className="mt-4 bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
-//       >
-//         Delete
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default WebsiteCard;
-

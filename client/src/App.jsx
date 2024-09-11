@@ -1,13 +1,21 @@
-import Dashboard from "./components/Dashboard"
-import Navbar from "./components/Navbar"
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Dashboaard from './components/Dashboard';
+import WebsitesList from './components/WebsiteList';
 
 const App = () => {
   return (
-    <div>
+    <Router>
       <Navbar />
-      <Dashboard />
-    </div>
-  )
-}
+      <div className="p-4">
+        <Routes>
+          <Route path="/" element={<WebsitesList />} />
+          <Route path="/add-website" element={<Dashboaard />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;

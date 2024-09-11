@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import AddWebsiteForm from './AddWebsiteForm';
-import WebsitesList from "./WebsiteList"
 import { addNewWebsite } from '../services/ApiServices';
 
 const Dashboard= () => {
@@ -15,8 +14,7 @@ const Dashboard= () => {
   };
 
   return (
-    <div className="p-4 bg-[#e7ecef]">
-      <WebsitesList />
+    <div className="p-4">
       <AddWebsiteForm onAddWebsite={handleAddWebsite} />
     </div>
   );
