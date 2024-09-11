@@ -3,25 +3,37 @@ const { monitorWebsites } = require('../helpers/websiteStatusHelper');
 const { isURL } = require('validator');
 
 class WebsiteController {
-static async addWebsite(req, res) {
-  const { name, url } = req.body;
+  static async addWebsite(req, res) {
+    const { name, url } = req.body;
 
-  try {
-    const website = await models.Website.create({ name, url });
-    return res.status(201).json({
-      message: 'Website added successfully!',
-      website,
-    });
-  }catch (error) {
-    if (error.name === 'SequelizeUniqueConstraintError') {
-      const field = error.errors[0].path;
-      return res.status(400).json({
-        error: `A website with this ${field} already exists.`,
-      });
+    if (!name || !url) {
+      return res.status(400).json({ error: "Name and URL are required." });
     }
-    return res.status(500).json({ error: error.message });
+
+    try {
+      const existingWebsite = await models.Website.findOne({
+        where: {
+          [models.Sequelize.Op.or]: [{ name }, { url }],
+        },
+      });
+
+      if (existingWebsite) {
+        return res.status(409).json({ error: "Name or URL already exists." });
+      };
+
+      if (!isURL(url)) {
+        return res.status(400).json({ error: 'Invalid URL format.' });
+      }
+
+      const website = await models.Website.create(req.body);
+      return res.status(201).json({
+        message: "Website added successfully!",
+        website,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
-}
 
   
   static async getAllWebsites(req, res) {

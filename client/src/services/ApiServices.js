@@ -16,12 +16,13 @@ export const fetchAllWebsites = async () => {
 export const addNewWebsite = async (websiteData) => {
   try {
     const response = await axios.post(API_URL, websiteData);
-    return response.data;
+    return response;
   } catch (error) {
     console.error('Error adding new website:', error);
     throw error;
   }
 };
+
 
 export const deleteWebsite = async (websiteId) => {
   try {

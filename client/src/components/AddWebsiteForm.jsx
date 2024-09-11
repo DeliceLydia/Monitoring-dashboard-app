@@ -1,35 +1,44 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addNewWebsite } from '../services/ApiServices';
 
-const AddWebsiteForm = ({ onAddWebsite }) => {
+const AddWebsiteForm = () => {
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    setSuccess(null);
+    setError('');
+    setSuccess('');
+
+    if (!name || !url) {
+      setError('Both Name and URL are required.');
+      return;
+    }
+
     try {
-      await onAddWebsite({ name, url });
-      setSuccess('Website added successfully!');
-      setName('');
-      setUrl('');
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
-    }catch (err) {
-      console.log(err); // Add this line to inspect the error object
-      if (err.response && err.response.data.error) {
-        if (err.response.data.error.includes('name')) {
-          setError('The website name already exists. Please use a different name.');
-        } else if (err.response.data.error.includes('url')) {
-          setError('The website URL already exists. Please use a different URL.');
-        } else {
-          setError(err.response.data.error);
-        }
+      const response = await addNewWebsite({ name, url });
+      if (response && response.status === 201) {
+        setSuccess('Website added successfully!');
+        setName('');
+        setUrl('');
+
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      } else {
+        setError('Unexpected response. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error adding website:', err);
+
+      if (err.response && err.response.status === 409) {
+        setError('The website already exists. Please use a different name or URL.');
+      } else if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
       } else {
         setError('Failed to add the website. Please try again.');
       }
@@ -43,10 +52,8 @@ const AddWebsiteForm = ({ onAddWebsite }) => {
     >
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Add New Website</h2>
 
-      {/* Display error message */}
       {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-      {/* Display success message */}
       {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
 
       <div className="mb-4">
