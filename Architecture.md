@@ -98,3 +98,31 @@ This section details the API endpoints used by the Monitoring Dashboard. Each en
 - `409 Conflict`: is useful for informing the client that their request could not be completed due to a conflict
 - `500 Internal Server Error`: An error occurred on the server.
 
+4. Design Decisions
+
+### Rationale
+
+1. Backend: Node.js and Express
+- Reason: Node.js is great for handling lots of requests at once, and Express makes it easy to set up and manage routes.
+Benefits: Fast performance and scalability for our API.
+
+2. Frontend: React
+- Reason: React’s component-based approach makes it easy to build and manage the user interface.
+Benefits: Efficient updates and a strong ecosystem for building interactive UIs.
+
+3. Database: PostgreSQL
+- Reason: PostgreSQL is reliable and supports complex queries and transactions.
+Benefits: Strong data integrity and scalability.
+
+4. Architecture: RESTful API
+Reason: RESTful APIs are simple and widely used for handling CRUD operations.
+Benefits: Easy integration and scalability.
+
+### Alternatives Considered
+
+- Backend: Node.js and Express they have a better performance and a unified JavaScript stack.
+- Frontend: React’s simplicity and flexibility were preferred.
+- Database: PostgreSQL’s advanced features made it a better fit.
+- Architecture: I chose REST for its simplicity and familiarity.
+
+
