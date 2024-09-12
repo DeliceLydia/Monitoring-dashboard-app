@@ -41,6 +41,8 @@ This section details the API endpoints used by the Monitoring Dashboard. Each en
 
 ```
 - Response Format:
+
+```
 {
   "id": 1,
   "name": "twitter",
@@ -49,4 +51,50 @@ This section details the API endpoints used by the Monitoring Dashboard. Each en
 }
 ```
 
-2. 
+2. Get Websites
+
+- Endpoint URL: ```/api/websites```
+- HTTP Method: ```GET```
+- Purpose: Retrieves a list of all websites currently being monitored.
+- Response Format
+```
+{
+    "message": "Websites retrieved successfully!",
+    "websites": [
+        {
+            "id": 14,
+            "name": "e-fiche",
+            "url": "https://test.efiche.rw/login?endSession=1",
+            "status": "online",
+            "lastChecked": "2024-09-12T10:55:54.256Z",
+            "createdAt": "2024-09-07T16:04:05.315Z",
+            "updatedAt": "2024-09-12T10:55:54.258Z"
+        },
+        {
+            "id": 41,
+            "name": "Twitter",
+            "url": "https://x.com",
+            "status": "online",
+            "lastChecked": "2024-09-12T10:55:55.026Z",
+            "createdAt": "2024-09-11T18:17:32.936Z",
+            "updatedAt": "2024-09-12T10:55:55.027Z"
+        },
+    ]
+}
+```
+
+3. Delete Website
+
+- Endpoint URL: ```/api/websites/:id```
+- HTTP Method: ```DELETE```
+- Purpose: Deletes a specific website from the monitoring system.
+- Request Format: None
+
+### Common HTTP Status Codes:
+
+`200 OK`: The request was successful.
+`201 Created`: The request was successful created.
+`400 Bad Request`: There was an issue with the request parameters.
+`409 Conflict`: is useful for informing the client that their request could not be completed due to a conflict
+`500 Internal Server Error`: An error occurred on the server.
+
