@@ -92,9 +92,9 @@ This section details the API endpoints used by the Monitoring Dashboard. Each en
 
 ### Common HTTP Status Codes:
 
-`200 OK`: The request was successful.
-`201 Created`: The request was successful created.
-`400 Bad Request`: There was an issue with the request parameters.
-`409 Conflict`: is useful for informing the client that their request could not be completed due to a conflict
-`500 Internal Server Error`: An error occurred on the server.
+- `200 OK`: The request was successful.
+- `201 Created`: The request was successful created.
+- `400 Bad Request`: There was an issue with the request parameters.
+- `409 Conflict`: is useful for informing the client that their request could not be completed due to a conflict
+- `500 Internal Server Error`: An error occurred on the server.
 
