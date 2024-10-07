@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3000/api';
-const API_URL = 'http://localhost:3000/api/websites'; 
 
 export const fetchAllWebsites = async () => {
   try {
@@ -15,7 +14,7 @@ export const fetchAllWebsites = async () => {
 
 export const addNewWebsite = async (websiteData) => {
   try {
-    const response = await axios.post(API_URL, websiteData);
+    const response = await axios.post(`${BASE_URL}/websites`, websiteData);
     return response;
   } catch (error) {
     console.error('Error adding new website:', error);
@@ -23,10 +22,9 @@ export const addNewWebsite = async (websiteData) => {
   }
 };
 
-
 export const deleteWebsite = async (websiteId) => {
   try {
-    const response = await axios.delete(`${API_URL}/${websiteId}`);
+    const response = await axios.delete(`${BASE_URL}/websites/${websiteId}`);
     return response.data;
   } catch (error) {
     console.error('Error deleting website:', error);

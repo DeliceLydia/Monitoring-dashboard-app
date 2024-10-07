@@ -3,7 +3,6 @@ import { TrashIcon } from '@heroicons/react/outline';
 
 const WebsiteCard = ({ name, url, status, onDelete }) => {
   return (
-
     <div className="bg-white shadow-md rounded-lg p-4 w-full max-w-sm">
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-lg font-semibold text-blue-800">Website</h3>

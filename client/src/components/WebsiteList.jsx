@@ -12,7 +12,7 @@ const WebsitesList = () => {
       try {
         setLoading(true);
         const fetchedWebsites = await fetchAllWebsites();
-        setWebsites(fetchedWebsites);
+        setWebsites(fetchedWebsites || []);
       } catch (err) {
         setError('Failed to fetch websites. Please try again later.');
       } finally {
@@ -37,7 +37,7 @@ const WebsitesList = () => {
   };
 
   return (
-    <div className=''>
+    <>
       <h1 className="px-4 font-bold text-lg">MONITORING LISTS</h1>
       <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
         {loading && <p>Loading websites...</p>}
@@ -54,7 +54,7 @@ const WebsitesList = () => {
             />
           ))}
       </div>
-    </div>
+    </>
   );
 };
 
