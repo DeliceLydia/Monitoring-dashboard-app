@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
   res.send('Welcome to the Website monitoring dashboard!');
 });
 router.post('/websites', WebsiteController.addWebsite);
-router.post('/trigger-monitoring', WebsiteController.triggerMonitoring);
 router.get('/websites', WebsiteController.getAllWebsites);
 router.delete('/websites/:id', WebsiteController.deleteWebsite);
 router.get('/websites/:id', WebsiteController.getWebsiteById);

@@ -1,5 +1,4 @@
 const models = require("../../models");
-const { monitorWebsites } = require('../helpers/websiteStatusHelper');
 const { isURL } = require('validator');
 
 class WebsiteController {
@@ -86,15 +85,6 @@ class WebsiteController {
       return res.status(500).json({ error: error.message });
     }
   };
-
-  static async triggerMonitoring(req, res) {
-    try {
-      await monitorWebsites();
-      return res.status(200).json({ message: 'Monitoring triggered successfully.' });
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
-    }
-  }
 }
 
 module.exports = WebsiteController;
